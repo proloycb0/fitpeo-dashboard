@@ -15,6 +15,11 @@ import Paper from '@mui/material/Paper';
 import MenuIcon from '@mui/icons-material/Menu';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import ListItems from './ListItems';
+import { AccessTimeFilled, GridViewOutlined, Image, LocalMall, NotificationsOutlined, PeopleAlt, SearchOutlined, SettingsOutlined } from '@mui/icons-material';
+import { Avatar, ButtonBase, Chip } from '@mui/material';
+import OverviewChart from './OverviewChart';
+import Activity from './Activity';
+import OrderChart from './OrderChart';
 
 const drawerWidth = 240;
 
@@ -26,6 +31,8 @@ const AppBar = styled(MuiAppBar, {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
+  backgroundColor: "#F5F5F5",
+  color: "black",
   ...(open && {
     marginLeft: drawerWidth,
     width: `calc(100% - ${drawerWidth}px)`,
@@ -64,6 +71,13 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  ...theme.typography.body2,
+  padding: theme.spacing(5),
+  color: theme.palette.text.secondary,
+}));
+
 const mdTheme = createTheme();
 
 function DashboardContent() {
@@ -99,15 +113,32 @@ function DashboardContent() {
               variant="h6"
               color="inherit"
               noWrap
-              // sx={{ flexGrow: 1 }}
             >
               Dashboard
             </Typography>
+            <Box sx={{ flexGrow: 1 }} />
+            <IconButton color="inherit">
+              <SearchOutlined />
+            </IconButton>
+            <IconButton color="inherit">
+              <img src="https://media.flaticon.com/dist/min/img/flags/en.svg" alt='' width="20" height="20" loading="lazy" />
+            </IconButton>
+            <IconButton color="inherit">
+              <GridViewOutlined />
+            </IconButton>
             <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
+                <NotificationsOutlined />
               </Badge>
             </IconButton>
+            <IconButton color="inherit">
+              <SettingsOutlined />
+            </IconButton>
+            <Avatar
+              alt="Remy Sharp"
+              src="https://images.pexels.com/photos/1642228/pexels-photo-1642228.jpeg?auto=compress&cs=tinysrgb&w=600"
+              sx={{ width: 24, height: 24 }}
+            />
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>
@@ -135,46 +166,202 @@ function DashboardContent() {
                 ? theme.palette.grey[100]
                 : theme.palette.grey[900],
             flexGrow: 1,
-            height: '100vh',
-            overflow: 'auto',
+            // height: '50vh',
+            // overflow: 'auto',
           }}
         >
           <Toolbar />
-          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+          <Container sx={{ mt: 4 }}>
             <Grid container spacing={3}>
-              {/* Chart */}
-              <Grid item xs={12} md={8} lg={9}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 240,
-                  }}
-                >
-                  {/* <Chart /> */}
-                </Paper>
-              </Grid>
-              {/* Recent Deposits */}
-              <Grid item xs={12} md={4} lg={3}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 240,
-                  }}
-                >
-                  {/* <Deposits /> */}
-                </Paper>
-              </Grid>
-              {/* Recent Orders */}
-              <Grid item xs={12}>
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  {/* <Orders /> */}
-                </Paper>
+              <Grid container spacing={2}>
+                <Grid item xs={12} md={9}>
+                  <Grid container spacing={2} columns={{ xs: 4, sm: 8, md: 12 }}>
+
+                    <Paper
+                      sx={{
+                        p: 2,
+                        mt: 3,
+                        ml: 4,
+                        // maxWidth: 250,
+                        height: '80px',
+                        borderRadius: '15px',
+                        flexGrow: 1,
+                        backgroundColor: (theme) =>
+                          theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+                      }}
+                    >
+                      <Grid container spacing={2}>
+                        <Grid item sx={{ backgroundColor: '#2196f3', color: 'white', width: 55, ml: 2, mt: 2, borderRadius: '10px' }}>
+                          <AccessTimeFilled sx={{ mr: 3, mt: -0.25 }} />
+                        </Grid>
+                        <Grid item xs container>
+                          <Grid item xs container direction="column" spacing={2}>
+                            <Grid item xs sx={{ ml: -4 }}>
+                              <Typography variant="body2" color="text.secondary">
+                                Revenue
+                              </Typography>
+                              <Typography variant="h6">
+                                $21,456
+                              </Typography>
+                            </Grid>
+                          </Grid>
+                          <Grid sx={{ mt: 3 }}>
+                            <Chip label="+2.65%" variant="outlined" color="success" size="small" />
+                          </Grid>
+                        </Grid>
+                      </Grid>
+                    </Paper>
+
+                    <Paper
+                      sx={{
+                        p: 2,
+                        mt: 3,
+                        ml: 4,
+                        // maxWidth: 250,
+                        height: '80px',
+                        borderRadius: '15px',
+                        flexGrow: 1,
+                        backgroundColor: (theme) =>
+                          theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+                      }}
+                    >
+                      <Grid container spacing={2}>
+                        <Grid item sx={{ backgroundColor: '#2196f3', color: 'white', width: 55, ml: 2, mt: 2, borderRadius: '10px' }}>
+                          <LocalMall sx={{ mr: 3, mt: -0.25 }} />
+                        </Grid>
+                        <Grid item xs container>
+                          <Grid item xs container direction="column" spacing={2}>
+                            <Grid item xs sx={{ ml: -4 }}>
+                              <Typography variant="body2" color="text.secondary">
+                                Orders
+                              </Typography>
+                              <Typography variant="h6">
+                                5,643
+                              </Typography>
+                            </Grid>
+                          </Grid>
+                          <Grid sx={{ mt: 3 }}>
+                            <Chip label="-0.82%" variant="outlined" color="error" size="small" />
+                          </Grid>
+                        </Grid>
+                      </Grid>
+                    </Paper>
+
+                    <Paper
+                      sx={{
+                        p: 2,
+                        mt: 3,
+                        ml: 4,
+                        // maxWidth: 250,
+                        height: '80px',
+                        borderRadius: '15px',
+                        flexGrow: 1,
+                        backgroundColor: (theme) =>
+                          theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+                      }}
+                    >
+                      <Grid container spacing={2}>
+                        <Grid item sx={{ backgroundColor: '#2196f3', color: 'white', width: 55, ml: 2, mt: 2, borderRadius: '10px' }}>
+                          <PeopleAlt sx={{ mr: 3, mt: -0.25 }} />
+                        </Grid>
+                        <Grid item xs container>
+                          <Grid item xs container direction="column" spacing={2}>
+                            <Grid item xs sx={{ ml: -4 }}>
+                              <Typography variant="body2" color="text.secondary">
+                                Customers
+                              </Typography>
+                              <Typography variant="h6">
+                                45,254
+                              </Typography>
+                            </Grid>
+                          </Grid>
+                          <Grid sx={{ mt: 3 }}>
+                            <Chip label="-1.04%" variant="outlined" color="error" size="small" />
+                          </Grid>
+                        </Grid>
+                      </Grid>
+                    </Paper>
+                  </Grid>
+                  <Grid>
+                    <Paper
+                      sx={{
+                        p: 2,
+                        mt: 3,
+                        ml: 2,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        height: 240,
+                        borderRadius: '15px',
+                      }}
+                    >
+                      <OverviewChart />
+                    </Paper>
+                  </Grid>
+                  <Grid container spacing={2} columns={{ xs: 4, sm: 8, md: 12 }}>
+                    <Paper
+                      sx={{
+                        p: 2,
+                        mt: 3,
+                        ml: 4,
+                        // maxWidth: 250,
+                        height: '200px',
+                        borderRadius: '15px',
+                        flexGrow: 1,
+                        backgroundColor: (theme) =>
+                          theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+                      }}
+                    >
+                      <Activity />
+                    </Paper>
+                    <Paper
+                      sx={{
+                        p: 2,
+                        mt: 3,
+                        ml: 4,
+                        // maxWidth: 250,
+                        height: '200px',
+                        borderRadius: '15px',
+                        flexGrow: 1,
+                        backgroundColor: (theme) =>
+                          theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+                      }}
+                    >
+                      <OrderChart />
+                    </Paper>
+                    <Paper
+                      sx={{
+                        p: 2,
+                        mt: 3,
+                        ml: 4,
+                        // maxWidth: 250,
+                        height: '200px',
+                        borderRadius: '15px',
+                        flexGrow: 1,
+                        backgroundColor: (theme) =>
+                          theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+                      }}
+                    >
+                      <Activity />
+                    </Paper>
+                  </Grid>
+                </Grid>
+                <Grid item xs={12} md={3}>
+                  <Paper
+                    sx={{
+                      p: 2,
+                      mt: 1,
+                      display: 'flex',
+                      flexDirection: 'column',
+                      height: '1000px',
+                    }}
+                  >
+                    {/* <Deposits /> */}
+                  </Paper>
+                </Grid>
               </Grid>
             </Grid>
+
+
             {/* <Copyright sx={{ pt: 4 }} /> */}
           </Container>
         </Box>
